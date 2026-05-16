@@ -13,20 +13,26 @@
 - [ ] Architecture review with team
 - [ ] Design documentation
 
-### Phase 2: Core Implementation (May 19-24, 4 days)
-- [ ] Complete entity extraction (integrate spaCy/pythainlp)
-- [ ] Relationship inference logic
-- [ ] Neo4j integration
-- [ ] Compression & reference tracking
-- [ ] Streaming output (JSONL)
-- [ ] Error handling & recovery
+### Phase 2: Core Implementation (May 16-17 actual, 1 day accelerated)
+- [x] Complete entity extraction with word boundaries + Thai language detection
+- [x] Relationship inference logic with deterministic graph building
+- [x] Neo4j Cypher query builders (28 tests)
+- [x] JSON/JSONL output serialization
+- [x] Error handling & recovery via thiserror
 
-### Phase 3: Integration & Testing (May 25-28, 3 days)
-- [ ] Mimir API integration
-- [ ] End-to-end pipeline testing
-- [ ] Performance benchmarking
+### Phase 3: Orchestration (May 16-17, Day 9 actual)
+- [x] Pipeline orchestrator with status tracking
+- [x] Hit rate validator with decision gates (75%/50% thresholds)
+- [x] Mimir HTTP client for ingestion & search
+- [x] Mock client for testing without server
+- [x] 38 comprehensive tests (RED/GREEN/REFACTOR)
+- [x] Thai language test query support
+
+### Phase 4: Integration & Execution (May 19-28 planned → May 18-22 revised)
+- [ ] E2E pipeline testing with mock Mimir
+- [ ] Performance benchmarking (consolidation → ingestion)
+- [ ] Production readiness checklist
 - [ ] Documentation & examples
-- [ ] Code review & cleanup
 
 ### Phase 4: S1 Sprint Execution (June 2-11)
 - [ ] Load real Prudential/AXA/Thai Health data
