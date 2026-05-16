@@ -3,7 +3,7 @@ members = [
     "crates/refgraph-core",
     "crates/refgraph-neo4j",
     "crates/refgraph-domains",
-    "crates/refgraph-cli",
+    "crates/refgraph-cli", "crates/refgraph-orchestration",
 ]
 resolver = "2"
 
