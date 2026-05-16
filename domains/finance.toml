@@ -1,0 +1,79 @@
+[domain]
+name = "finance"
+version = "1"
+description = "Finance domain: account types, fees, rates, products"
+languages = ["en"]
+
+[thresholds]
+confidence = 0.78
+jaccard_dedup = 0.95
+cosine_consolidate = 0.96
+
+[entities.account_type]
+label = "AccountType"
+patterns = [
+    "savings account",
+    "checking account",
+    "money market",
+    "investment account",
+    "retirement account",
+    "brokerage account",
+]
+
+[entities.fee]
+label = "Fee"
+patterns = [
+    "fee",
+    "charge",
+    "commission",
+    "expense",
+    "cost",
+    "annual fee",
+    "maintenance fee",
+]
+
+[entities.rate]
+label = "Rate"
+patterns = [
+    "interest rate",
+    "APR",
+    "APY",
+    "rate of return",
+    "dividend yield",
+    "exchange rate",
+]
+
+[entities.product]
+label = "Product"
+patterns = [
+    "savings product",
+    "investment product",
+    "loan product",
+    "insurance product",
+    "fund",
+    "mutual fund",
+    "ETF",
+]
+
+[entities.regulation]
+label = "Regulation"
+patterns = [
+    "regulation",
+    "SEC",
+    "FDIC",
+    "compliance",
+    "requirement",
+    "rule",
+    "policy",
+]
+
+[edges]
+"account_type→fee" = "SUBJECT_TO"
+"account_type→rate" = "EARNS"
+"product→fee" = "HAS_FEE"
+"product→rate" = "HAS_RATE"
+"product→regulation" = "SUBJECT_TO"
+
+[metadata]
+confidence_threshold_override.rate = 0.85
+confidence_threshold_override.product = 0.80

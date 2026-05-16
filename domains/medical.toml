@@ -1,0 +1,79 @@
+[domain]
+name = "medical"
+version = "1"
+description = "Medical domain: symptoms, diagnoses, drugs, procedures"
+languages = ["en"]
+
+[thresholds]
+confidence = 0.80
+jaccard_dedup = 0.95
+cosine_consolidate = 0.96
+
+[entities.symptom]
+label = "Symptom"
+patterns = [
+    "fever",
+    "cough",
+    "dyspnea",
+    "chest pain",
+    "headache",
+    "fatigue",
+    "shortness of breath",
+]
+
+[entities.diagnosis]
+label = "Diagnosis"
+patterns = [
+    "ICD-10:",
+    "diagnosis:",
+    "condition:",
+    "disease",
+    "syndrome",
+    "disorder",
+]
+
+[entities.drug]
+label = "Drug"
+patterns = [
+    "metformin",
+    "aspirin",
+    "atorvastatin",
+    "lisinopril",
+    "amlodipine",
+    "paracetamol",
+    "ibuprofen",
+]
+
+[entities.procedure]
+label = "Procedure"
+patterns = [
+    "surgery",
+    "angioplasty",
+    "biopsy",
+    "endoscopy",
+    "ultrasound",
+    "CT scan",
+    "MRI",
+]
+
+[entities.condition]
+label = "Condition"
+patterns = [
+    "diabetes",
+    "hypertension",
+    "heart disease",
+    "asthma",
+    "arthritis",
+    "depression",
+]
+
+[edges]
+"symptom→diagnosis" = "INDICATES"
+"diagnosis→drug" = "TREATED_WITH"
+"drug→condition" = "TREATS"
+"procedure→diagnosis" = "USED_FOR"
+"drug→drug" = "CONTRAINDICATED_WITH"
+
+[metadata]
+confidence_threshold_override.diagnosis = 0.90
+confidence_threshold_override.drug = 0.85

@@ -1,0 +1,79 @@
+[domain]
+name = "legal"
+version = "1"
+description = "Legal domain: clauses, parties, obligations, rights"
+languages = ["en"]
+
+[thresholds]
+confidence = 0.80
+jaccard_dedup = 0.95
+cosine_consolidate = 0.96
+
+[entities.clause]
+label = "Clause"
+patterns = [
+    "clause",
+    "provision",
+    "section",
+    "article",
+    "term and condition",
+    "paragraph",
+]
+
+[entities.party]
+label = "Party"
+patterns = [
+    "party",
+    "party to",
+    "beneficiary",
+    "assignee",
+    "lessor",
+    "lessee",
+    "licensor",
+]
+
+[entities.obligation]
+label = "Obligation"
+patterns = [
+    "shall",
+    "must",
+    "required to",
+    "obligated",
+    "bound",
+    "liable",
+    "responsible for",
+]
+
+[entities.right]
+label = "Right"
+patterns = [
+    "right",
+    "entitled",
+    "permitted",
+    "allowed",
+    "right to",
+    "may",
+    "authorize",
+]
+
+[entities.jurisdiction]
+label = "Jurisdiction"
+patterns = [
+    "jurisdiction",
+    "governed by",
+    "law of",
+    "state of",
+    "country of",
+    "court of",
+]
+
+[edges]
+"clause→obligation" = "IMPOSES"
+"clause→right" = "GRANTS"
+"party→obligation" = "HAS_OBLIGATION"
+"party→right" = "HAS_RIGHT"
+"clause→jurisdiction" = "GOVERNED_BY"
+
+[metadata]
+confidence_threshold_override.clause = 0.85
+confidence_threshold_override.obligation = 0.80

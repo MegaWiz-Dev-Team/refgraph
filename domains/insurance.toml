@@ -1,0 +1,93 @@
+[domain]
+name = "insurance"
+version = "1"
+description = "Insurance domain: products, coverage, exclusions, conditions"
+languages = ["en", "th"]
+
+[thresholds]
+confidence = 0.72
+jaccard_dedup = 0.95
+cosine_consolidate = 0.96
+
+[entities.product]
+label = "Product"
+patterns = [
+    "Critical Illness",
+    "Health Insurance",
+    "Life Insurance",
+    "Health Plan",
+    "CI plan",
+    "CIL",
+]
+
+[entities.coverage]
+label = "Coverage"
+patterns = [
+    "Heart Attack",
+    "Stroke",
+    "Cancer",
+    "Diabetes",
+    "MI",
+    "CVA",
+    "Myocardial infarction",
+    "Cerebrovascular accident",
+]
+
+[entities.exclusion]
+label = "Exclusion"
+patterns = [
+    "Pre-existing Condition",
+    "Experimental Treatment",
+    "Cosmetic Surgery",
+    "War",
+    "Pre-existing",
+    "Not covered",
+]
+
+[entities.condition]
+label = "Condition"
+patterns = [
+    "waiting period",
+    "survival period",
+    "deductible",
+    "co-payment",
+    "premium",
+]
+
+[entities.organization]
+label = "Insurer"
+patterns = [
+    "Prudential",
+    "AXA",
+    "Allianz",
+    "FWD",
+    "Krungthai-AXA",
+    "CIGNA",
+    "Thai Health",
+]
+
+[edges]
+"product→coverage" = "HAS_COVERAGE"
+"product→exclusion" = "HAS_EXCLUSION"
+"coverage→condition" = "REQUIRES_CONDITION"
+"exclusion→condition" = "EXCLUDES_CONDITION"
+"product→organization" = "OFFERED_BY"
+
+[sources.prudential]
+url_pattern = "prudential.co.th/*"
+rate_limit_rps = 0.5
+user_agent = "RefGraph/0.1 (+https://github.com/refgraph-rs/refgraph)"
+
+[sources.axa]
+url_pattern = "axa.co.th/*"
+rate_limit_rps = 0.5
+user_agent = "RefGraph/0.1 (+https://github.com/refgraph-rs/refgraph)"
+
+[sources.thai_health]
+url_pattern = "thaihealth.co.th/*"
+rate_limit_rps = 0.5
+user_agent = "RefGraph/0.1 (+https://github.com/refgraph-rs/refgraph)"
+
+[metadata]
+confidence_threshold_override.exclusion = 0.75
+confidence_threshold_override.product = 0.85
