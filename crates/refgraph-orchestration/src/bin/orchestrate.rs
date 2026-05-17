@@ -293,13 +293,36 @@ fn cmd_sample(cmd: SampleCommands) {
             );
         }
         SampleCommands::AllConsolidations => {
-            println!("=== Critical Illness Consolidation ===");
+            eprintln!("=== Generating consolidated insurance data ===");
             let crit = reference_implementation::ConsolidationOutput::sample_critical_illness();
-            println!("{}", serde_json::to_string_pretty(&crit).unwrap_or_default());
-
-            println!("\n=== Health Insurance Consolidation ===");
             let health = reference_implementation::ConsolidationOutput::sample_health_insurance();
-            println!("{}", serde_json::to_string_pretty(&health).unwrap_or_default());
+
+            // Combine into a single ingestion request
+            let mut all_entities = Vec::new();
+            let mut all_relationships = Vec::new();
+            let mut total_confidence = 0.0;
+            let mut count = 0;
+
+            for output in [&crit, &health] {
+                all_entities.extend(output.entities.iter().map(|e| serde_json::json!(e)));
+                all_relationships.extend(output.relationships.iter().map(|r| serde_json::json!(r)));
+                total_confidence += output.average_confidence;
+                count += 1;
+            }
+
+            let request = MimirIngestionRequest {
+                tenant_id: "asgard_insurance".to_string(),
+                domain: "insurance".to_string(),
+                entity_count: all_entities.len(),
+                relationship_count: all_relationships.len(),
+                average_confidence: total_confidence / count as f32,
+                entities: all_entities,
+                relationships: all_relationships,
+            };
+
+            if let Ok(json) = serde_json::to_string_pretty(&request) {
+                println!("{}", json);
+            }
         }
     }
 }

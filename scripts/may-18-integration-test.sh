@@ -57,7 +57,7 @@ echo -e "${BLUE}[Step 2/5]${NC} Sample Data Generation"
 echo "Generating sample consolidation data from 9 insurance documents..."
 echo ""
 
-if $BINARY sample all-consolidations > "$OUTPUT_FILE" 2>&1; then
+if $BINARY sample all-consolidations > "$OUTPUT_FILE" 2>/dev/null; then
     FILE_SIZE=$(ls -lh "$OUTPUT_FILE" | awk '{print $5}')
     ENTITY_COUNT=$(grep -c '"entity_id"' "$OUTPUT_FILE" || echo "unknown")
     echo -e "${GREEN}✅ PASS${NC}: Sample data generated"
@@ -96,8 +96,13 @@ echo ""
 VALIDATION_OUTPUT=$($BINARY validate --verbose --mimir-url="$MIMIR_URL" --tenant-id="$TENANT_ID" 2>&1)
 echo "$VALIDATION_OUTPUT" | tee -a "$LOG_FILE"
 
-# Extract hit rate from output
-HIT_RATE=$(echo "$VALIDATION_OUTPUT" | grep -oP 'Hit.?[Rr]ate[:\s]+\K[0-9.]+(?:%)?|[0-9]+\.[0-9]+ *%' | head -1)
+# Extract hit rate from output (macOS compatible)
+HIT_RATE=$(echo "$VALIDATION_OUTPUT" | grep "Hit Rate:" | sed -E 's/.*Hit.?Rate:? *([0-9.]+)%.*/\1/' | head -1)
+if [[ -z "$HIT_RATE" ]]; then
+  HIT_RATE=$(echo "$VALIDATION_OUTPUT" | grep -oE "Hit Rate: [0-9.]+" | grep -oE "[0-9.]+" | head -1)
+fi
+# Add % sign if not present
+[[ "$HIT_RATE" != *"%" ]] && HIT_RATE="${HIT_RATE}%"
 
 if [[ -z "$HIT_RATE" ]]; then
     echo -e "${YELLOW}⚠️  WARNING${NC}: Could not extract hit rate from output"

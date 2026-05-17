@@ -9,15 +9,23 @@ pub struct MimirClient {
     client: Client,
     base_url: String,
     tenant_id: String,
+    token: Option<String>,
 }
 
 impl MimirClient {
     pub fn new(base_url: String, tenant_id: String) -> Self {
+        let token = std::env::var("MIMIR_TOKEN").ok();
         Self {
             client: Client::new(),
             base_url,
             tenant_id,
+            token,
         }
+    }
+
+    pub fn with_token(mut self, token: String) -> Self {
+        self.token = Some(token);
+        self
     }
 
     /// Ingest RefGraph consolidated output into Mimir
@@ -36,10 +44,13 @@ impl MimirClient {
             "relationships": request.relationships,
         });
 
-        let response = self
-            .client
-            .post(&url)
-            .json(&payload)
+        let mut request = self.client.post(&url).json(&payload);
+
+        if let Some(token) = &self.token {
+            request = request.header("Authorization", format!("Bearer {}", token));
+        }
+
+        let response = request
             .send()
             .await
             .map_err(|e| OrchestrationError::MimirError(format!("Request failed: {}", e)))?;
@@ -74,9 +85,13 @@ impl MimirClient {
             self.base_url, self.tenant_id, query, k
         );
 
-        let response = self
-            .client
-            .get(&url)
+        let mut request = self.client.get(&url);
+
+        if let Some(token) = &self.token {
+            request = request.header("Authorization", format!("Bearer {}", token));
+        }
+
+        let response = request
             .send()
             .await
             .map_err(|e| OrchestrationError::MimirError(format!("Search failed: {}", e)))?;
