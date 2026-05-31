@@ -1,0 +1,135 @@
+{
+  "domain": "insurance",
+  "entities": [
+    {
+      "id": "axa_001",
+      "entity_type": "PRODUCT",
+      "text": "AXA Comprehensive Health Insurance",
+      "confidence": 0.95,
+      "sources": [
+        "axa_doc_1"
+      ]
+    },
+    {
+      "id": "axa_002",
+      "entity_type": "COVERAGE",
+      "text": "Hospital Room and Board Coverage",
+      "confidence": 0.93,
+      "sources": [
+        "axa_doc_1"
+      ]
+    },
+    {
+      "id": "axa_003",
+      "entity_type": "COVERAGE",
+      "text": "Surgical Procedure Coverage",
+      "confidence": 0.92,
+      "sources": [
+        "axa_doc_1"
+      ]
+    },
+    {
+      "id": "axa_004",
+      "entity_type": "COVERAGE",
+      "text": "Outpatient Treatment Coverage",
+      "confidence": 0.91,
+      "sources": [
+        "axa_doc_2"
+      ]
+    },
+    {
+      "id": "axa_005",
+      "entity_type": "LIMIT",
+      "text": "Annual Coverage Limit",
+      "confidence": 0.89,
+      "sources": [
+        "axa_doc_2"
+      ]
+    },
+    {
+      "id": "axa_006",
+      "entity_type": "DEDUCTIBLE",
+      "text": "Annual Deductible Amount",
+      "confidence": 0.88,
+      "sources": [
+        "axa_doc_3"
+      ]
+    },
+    {
+      "id": "axa_007",
+      "entity_type": "EXCLUSION",
+      "text": "Cosmetic procedures not covered",
+      "confidence": 0.85,
+      "sources": [
+        "axa_doc_3"
+      ]
+    },
+    {
+      "id": "axa_008",
+      "entity_type": "CLAIM",
+      "text": "Claims Processing Procedure",
+      "confidence": 0.87,
+      "sources": [
+        "axa_doc_3"
+      ]
+    },
+    {
+      "id": "axa_009",
+      "entity_type": "COVERAGE",
+      "text": "Hospital Room & Board Coverage",
+      "confidence": 0.92,
+      "sources": [
+        "axa_doc_1"
+      ],
+      "_note": "near-duplicate of axa_002 (only '&' vs 'and') — Jaccard ~0.97, should dedup"
+    },
+    {
+      "id": "axa_010",
+      "entity_type": "EXCLUSION",
+      "text": "experimental treatment excluded (partial OCR)",
+      "confidence": 0.58,
+      "sources": [
+        "axa_doc_3"
+      ],
+      "_note": "low-confidence (<0.70) — triggers manual review queue"
+    }
+  ],
+  "relationships": [
+    {
+      "source_id": "axa_001",
+      "target_id": "axa_002",
+      "relationship_type": "HAS_COVERAGE",
+      "confidence": 0.90
+    },
+    {
+      "source_id": "axa_001",
+      "target_id": "axa_003",
+      "relationship_type": "HAS_COVERAGE",
+      "confidence": 0.89
+    },
+    {
+      "source_id": "axa_001",
+      "target_id": "axa_004",
+      "relationship_type": "HAS_COVERAGE",
+      "confidence": 0.88
+    },
+    {
+      "source_id": "axa_001",
+      "target_id": "axa_005",
+      "relationship_type": "HAS_LIMIT",
+      "confidence": 0.86
+    },
+    {
+      "source_id": "axa_001",
+      "target_id": "axa_006",
+      "relationship_type": "HAS_DEDUCTIBLE",
+      "confidence": 0.85
+    }
+  ],
+  "average_confidence": 0.897,
+  "source": "AXA Insurance Documents",
+  "timestamp": "2026-05-24T00:00:00Z",
+  "tenant_id": "asgard_insurance",
+  "entity_count": 8,
+  "relationship_count": 5
+}

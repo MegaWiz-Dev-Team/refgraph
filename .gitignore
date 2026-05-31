@@ -1,0 +1,5 @@
+# Rust build output
+target/
+
+# Local test run outputs (timestamped JSON dumps, ad-hoc samples)
+test-artifacts/

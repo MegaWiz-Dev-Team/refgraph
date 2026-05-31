@@ -1,0 +1,137 @@
+{
+  "domain": "insurance",
+  "entities": [
+    {
+      "id": "th_001",
+      "entity_type": "PRODUCT",
+      "text": "ประกันสุขภาพครอบครัวสมบูรณ์",
+      "confidence": 0.93,
+      "sources": [
+        "thai_doc_1"
+      ]
+    },
+    {
+      "id": "th_002",
+      "entity_type": "COVERAGE",
+      "text": "ความคุ้มครองการรักษาในโรงพยาบาล",
+      "confidence": 0.91,
+      "sources": [
+        "thai_doc_1"
+      ]
+    },
+    {
+      "id": "th_003",
+      "entity_type": "COVERAGE",
+      "text": "ความคุ้มครองอุบัติเหตุและการบาดเจ็บ",
+      "confidence": 0.90,
+      "sources": [
+        "thai_doc_1"
+      ]
+    },
+    {
+      "id": "th_004",
+      "entity_type": "BENEFIT",
+      "text": "สิทธิประโยชน์การตรวจรักษาเบื้องต้น",
+      "confidence": 0.89,
+      "sources": [
+        "thai_doc_2"
+      ]
+    },
+    {
+      "id": "th_005",
+      "entity_type": "PREMIUM",
+      "text": "เบี้ยประกันรายเดือน",
+      "confidence": 0.87,
+      "sources": [
+        "thai_doc_2"
+      ]
+    },
+    {
+      "id": "th_006",
+      "entity_type": "TERM",
+      "text": "ระยะเวลาการให้ความคุ้มครองตลอดชีวิต",
+      "confidence": 0.88,
+      "sources": [
+        "thai_doc_3"
+      ]
+    },
+    {
+      "id": "th_007",
+      "entity_type": "EXCLUSION",
+      "text": "ไม่รวมโรคประจำตัวเดิมของผู้ประกันตน",
+      "confidence": 0.84,
+      "sources": [
+        "thai_doc_3"
+      ]
+    },
+    {
+      "id": "th_008",
+      "entity_type": "DOCUMENT",
+      "text": "เอกสารและหลักฐานสำหรับการเบิกจ่าย",
+      "confidence": 0.86,
+      "sources": [
+        "thai_doc_3"
+      ]
+    },
+    {
+      "id": "th_009",
+      "entity_type": "COVERAGE",
+      "text": "ความคุ้มครองการรักษาในโรงพยาบาลผู้ป่วยใน",
+      "confidence": 0.90,
+      "sources": [
+        "thai_doc_1"
+      ],
+      "_note": "near-duplicate of th_002 (extends with ผู้ป่วยใน) — Jaccard ~0.95, dedup boundary case"
+    },
+    {
+      "id": "th_010",
+      "entity_type": "BENEFIT",
+      "text": "สิทธิประโยชน์เพิ่มเติม (OCR ไม่ชัด)",
+      "confidence": 0.55,
+      "sources": [
+        "thai_doc_2"
+      ],
+      "_note": "low-confidence Thai OCR (<0.70) — manual review per S2 OCR plan"
+    }
+  ],
+  "relationships": [
+    {
+      "source_id": "th_001",
+      "target_id": "th_002",
+      "relationship_type": "HAS_COVERAGE",
+      "confidence": 0.87
+    },
+    {
+      "source_id": "th_001",
+      "target_id": "th_003",
+      "relationship_type": "HAS_COVERAGE",
+      "confidence": 0.86
+    },
+    {
+      "source_id": "th_001",
+      "target_id": "th_004",
+      "relationship_type": "HAS_BENEFIT",
+      "confidence": 0.85
+    },
+    {
+      "source_id": "th_001",
+      "target_id": "th_005",
+      "relationship_type": "HAS_PREMIUM",
+      "confidence": 0.84
+    },
+    {
+      "source_id": "th_001",
+      "target_id": "th_007",
+      "relationship_type": "HAS_EXCLUSION",
+      "confidence": 0.82
+    }
+  ],
+  "average_confidence": 0.879,
+  "source": "Thai Health Insurance Documents",
+  "timestamp": "2026-05-25T00:00:00Z",
+  "language": "th_TH",
+  "note": "Full Thai language support verified with entity extraction from Thai text (ป้องกัน, สุขภาพ, ประกัน terms)",
+  "tenant_id": "asgard_insurance",
+  "entity_count": 8,
+  "relationship_count": 5
+}

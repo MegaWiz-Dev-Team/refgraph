@@ -1,0 +1,135 @@
+{
+  "domain": "insurance",
+  "entities": [
+    {
+      "id": "pru_001",
+      "entity_type": "PRODUCT",
+      "text": "Prudential Critical Illness Insurance Plan",
+      "confidence": 0.94,
+      "sources": [
+        "prudential_doc_1"
+      ]
+    },
+    {
+      "id": "pru_002",
+      "entity_type": "COVERAGE",
+      "text": "Heart Attack Coverage",
+      "confidence": 0.92,
+      "sources": [
+        "prudential_doc_1"
+      ]
+    },
+    {
+      "id": "pru_003",
+      "entity_type": "COVERAGE",
+      "text": "Cancer Coverage",
+      "confidence": 0.91,
+      "sources": [
+        "prudential_doc_1"
+      ]
+    },
+    {
+      "id": "pru_004",
+      "entity_type": "COVERAGE",
+      "text": "Stroke Benefit",
+      "confidence": 0.90,
+      "sources": [
+        "prudential_doc_1"
+      ]
+    },
+    {
+      "id": "pru_005",
+      "entity_type": "TERM",
+      "text": "10-year Term",
+      "confidence": 0.88,
+      "sources": [
+        "prudential_doc_2"
+      ]
+    },
+    {
+      "id": "pru_006",
+      "entity_type": "BENEFIT",
+      "text": "Death Benefit",
+      "confidence": 0.89,
+      "sources": [
+        "prudential_doc_2"
+      ]
+    },
+    {
+      "id": "pru_007",
+      "entity_type": "EXCLUSION",
+      "text": "Pre-existing conditions excluded",
+      "confidence": 0.86,
+      "sources": [
+        "prudential_doc_3"
+      ]
+    },
+    {
+      "id": "pru_008",
+      "entity_type": "PREMIUM",
+      "text": "Monthly Premium Payment",
+      "confidence": 0.87,
+      "sources": [
+        "prudential_doc_3"
+      ]
+    },
+    {
+      "id": "pru_009",
+      "entity_type": "COVERAGE",
+      "text": "Heart Attack Insurance Coverage",
+      "confidence": 0.91,
+      "sources": [
+        "prudential_doc_1"
+      ],
+      "_note": "near-duplicate of pru_002 (Jaccard ~0.96) — should be deduplicated"
+    },
+    {
+      "id": "pru_010",
+      "entity_type": "BENEFIT",
+      "text": "Hospice Care Benefit (partial extraction)",
+      "confidence": 0.62,
+      "sources": [
+        "prudential_doc_3"
+      ],
+      "_note": "low-confidence (<0.70) — should trigger manual review per S2 OCR plan"
+    }
+  ],
+  "relationships": [
+    {
+      "source_id": "pru_001",
+      "target_id": "pru_002",
+      "relationship_type": "HAS_COVERAGE",
+      "confidence": 0.88
+    },
+    {
+      "source_id": "pru_001",
+      "target_id": "pru_003",
+      "relationship_type": "HAS_COVERAGE",
+      "confidence": 0.87
+    },
+    {
+      "source_id": "pru_001",
+      "target_id": "pru_004",
+      "relationship_type": "HAS_COVERAGE",
+      "confidence": 0.86
+    },
+    {
+      "source_id": "pru_001",
+      "target_id": "pru_005",
+      "relationship_type": "HAS_TERM",
+      "confidence": 0.85
+    },
+    {
+      "source_id": "pru_001",
+      "target_id": "pru_007",
+      "relationship_type": "HAS_EXCLUSION",
+      "confidence": 0.83
+    }
+  ],
+  "average_confidence": 0.885,
+  "source": "Prudential Insurance Documents",
+  "timestamp": "2026-05-23T00:00:00Z",
+  "tenant_id": "asgard_insurance",
+  "entity_count": 10,
+  "relationship_count": 5
+}
