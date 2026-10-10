@@ -4,7 +4,7 @@
 
 ```
 Client ID:     368876822349333070
-Client Secret: CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU
+Client Secret: <REDACTED_PLACEHOLDER>
 Yggdrasil URL: http://localhost:8085
 ```
 
@@ -18,7 +18,7 @@ Yggdrasil URL: http://localhost:8085
 4. สร้างใหม่ (Create):
    - Name: `mimir-api`
    - Client ID: `368876822349333070`
-   - Client Secret: `CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU`
+   - Client Secret: `<REDACTED_PLACEHOLDER>`
    - Grant Type: `client_credentials`
    - Scopes: `openid profile email`
 
@@ -39,7 +39,7 @@ INSERT INTO oauth2_clients (
   created_at
 ) VALUES (
   '368876822349333070',
-  'CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU',
+  '<REDACTED_PLACEHOLDER>',
   'mimir-api',
   'client_credentials',
   'openid profile email',
@@ -60,7 +60,7 @@ curl -s -X POST http://localhost:8085/admin/oauth2/clients \
   -H "Content-Type: application/json" \
   -d '{
     "client_id": "368876822349333070",
-    "client_secret": "CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU",
+    "client_secret": "<REDACTED_PLACEHOLDER>",
     "client_name": "mimir-api",
     "grant_types": ["client_credentials"],
     "scopes": ["openid", "profile", "email"]
@@ -72,7 +72,7 @@ curl -s -X POST http://localhost:8085/admin/oauth2/clients \
 ส่ง credentials นี้ให้ Asgard admin เพื่อลงทะเบียน:
 ```
 Client ID: 368876822349333070
-Client Secret: CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU
+Client Secret: <REDACTED_PLACEHOLDER>
 ```
 
 ---
@@ -87,7 +87,7 @@ TOKEN=$(curl -s -X POST http://localhost:8085/oauth/v2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=client_credentials" \
   -d "client_id=368876822349333070" \
-  -d "client_secret=CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU" \
+  -d "client_secret=<REDACTED_PLACEHOLDER>" \
   -d "scope=openid" | jq -r '.access_token')
 
 echo "Token: $TOKEN"

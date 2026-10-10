@@ -72,7 +72,7 @@ Cannot get token → Cannot authenticate → Test blocked
 **Credentials available:**
 ```
 Client ID:     368876822349333070
-Client Secret: CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU
+Client Secret: <REDACTED_PLACEHOLDER>
 Issuer:        https://sso.asgard.internal
 Masterkey:     yggdrasil-masterkey-change-me-ok (from K8s secrets)
 ```
@@ -89,7 +89,7 @@ Masterkey:     yggdrasil-masterkey-change-me-ok (from K8s secrets)
 3. Register OAuth2 Client:
    - Name: `mimir-api`
    - Client ID: `368876822349333070`
-   - Client Secret: `CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU`
+   - Client Secret: `<REDACTED_PLACEHOLDER>`
    - Grant Type: `client_credentials`
    - Scope: `openid profile email`
    - Redirect URI: `https://mimir.asgard.internal/login/callback`
@@ -100,7 +100,7 @@ Masterkey:     yggdrasil-masterkey-change-me-ok (from K8s secrets)
      -H "Content-Type: application/x-www-form-urlencoded" \
      -d "grant_type=client_credentials" \
      -d "client_id=368876822349333070" \
-     -d "client_secret=CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU" \
+     -d "client_secret=<REDACTED_PLACEHOLDER>" \
      -d "scope=openid" | jq -r '.access_token')
    echo $TOKEN
    ```
@@ -135,7 +135,7 @@ INSERT INTO oauth2_clients (
   scopes
 ) VALUES (
   '368876822349333070',
-  'CeGcfzog8DcJ4cxK658tRtCeEgFwdt1AAU60twz5Su1qIpsGtfdqtq8NYAryxJzmU',
+  '<REDACTED_PLACEHOLDER>',
   'mimir-api',
   'client_credentials',
   'https://mimir.asgard.internal/login/callback',
